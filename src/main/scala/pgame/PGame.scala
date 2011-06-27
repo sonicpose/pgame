@@ -2,6 +2,9 @@ package pgame
 
 object PGame extends App {
     
-    println ("Hello World!")
-    
+  println("Welcome to Pokemon Distortion!")
+
+  val e = Pokemon("Elemental", Set(Attack.ELEMENTAL_PYLON), Set(PokemonType.ELEMENTAL))
+
+  println(e)
 }
