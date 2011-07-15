@@ -34,13 +34,39 @@ object PGame extends App {
   println("Player 2 is %s".format(player2))
 
 
-  println("%s choose your Pokemon".format(player1.name))
+  def choosePokemon(player: Trainer): Pokemon = {
+    println("%s choose your Pokemon".format(player.name))
 
-  player1.pokemon.toSeq.zipWithIndex.map {
-    case (p, i) =>
-      println("  %d: %s".format(i, p.nickname))
+    player.pokemon.toSeq.zipWithIndex.map {
+      case (p, i) =>
+        println("  %d: %s".format(i, p.nickname))
+    }
+    val playerChoice = readLine("Choice: ")
+    val pokemon = player.pokemon.toSeq(playerChoice.toInt)
+    return pokemon
   }
-  val player1choice = readLine("Choice: ")
-  val pokemon1 = player1.pokemon.toSeq(player1choice.toInt)
+
+  def chooseAttack(player: Trainer, pokemon: Pokemon): Attack.Value = {
+    println("%s choose your attack".format(player.name))
+
+    pokemon.attacks.map { a =>
+        println("  %d: %s".format(a.id, a.toString))
+    }
+    val playerChoice = readLine("Choice: ")
+    val attack = Attack(playerChoice.toInt)
+    return attack
+  }
+
+  val pokemon1 = choosePokemon(player1)
   println("You have chosen %s".format(pokemon1))
+
+  val pokemon2 = choosePokemon(player2)
+  println("You have chosen %s".format(pokemon2))
+
+  val attack1 = chooseAttack(player1, pokemon1)
+  println("You have chosen %s".format(attack1))
+
+  val attack2 = chooseAttack(player2, pokemon2)
+  println("You have chosen %s".format(attack2))
+
 }
