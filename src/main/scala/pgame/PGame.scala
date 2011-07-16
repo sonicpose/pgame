@@ -5,16 +5,17 @@ object PGame extends App {
   println("Welcome to Pokemon Master Quest!")
 
   // Daniel's
-  val iceDragon = Pokemon("Kyuri", Set(Attack.FLY, Attack.ICE_BLADE, Attack.PROTECT, Attack.ICE_BEAM),
-    Set(PokemonType.ICE, PokemonType.DRAGON, PokemonType.FLYING), "Kyuro")
-  val e = Pokemon("Elemental", Set(Attack.ELEMENTAL_PYLON, Attack.ELEMENTAL_BOLT, Attack.PROTECT, Attack.ELEMENTAL_BLAST), Set(PokemonType.ELEMENTAL), "Elemental")
+  val iceDragon = Pokemon("Kyuru", Set(Attack.FLY, Attack.ICE_BLADE, Attack.PROTECT, Attack.ICE_BEAM),
+    Set(PokemonType.ICE, PokemonType.DRAGON, PokemonType.FLYING), "Kyuro", level = 92, healthPoints = 99960)
+  val e = Pokemon("Elemental", Set(Attack.ELEMENTAL_PYLON, Attack.ELEMENTAL_BOLT, Attack.PROTECT,
+    Attack.ELEMENTAL_BLAST), Set(PokemonType.ELEMENTAL), "Elemental", level = 100, healthPoints = 99990)
   val daniel = Trainer("daniel", Set(e, iceDragon))
 
   // Joe's
   val pi = Pokemon("Pigno", Set(Attack.FLAME_PUNCH, Attack.FIRE_SPIN, Attack.FLAME_WHEEL, Attack.HEAD_BUT),
-    Set(PokemonType.FIRE, PokemonType.FIGHTING), "Pigno")
+    Set(PokemonType.FIRE, PokemonType.FIGHTING), "Pigno", level = 100, healthPoints = 99990)
   val je = Pokemon("Jelemental", Set(Attack.ELEMENTAL_RING, Attack.ELEMENTAL_PAW, Attack.BUSHY_TAIL,
-    Attack.HEAD_BUT), Set(PokemonType.ELEMENTAL), "Jelemental")
+    Attack.HEAD_BUT), Set(PokemonType.ELEMENTAL), "Jelemental", level = 100, healthPoints = 99990)
   val joe = Trainer("joe", Set(je, pi))
 
   var player1: Trainer = _
@@ -57,6 +58,8 @@ object PGame extends App {
     return attack
   }
 
+  def damageDone(pokemonLevel: Int) = pokemonLevel * 49
+
   val pokemon1 = choosePokemon(player1)
   println("You have chosen %s".format(pokemon1))
 
@@ -68,5 +71,12 @@ object PGame extends App {
 
   val attack2 = chooseAttack(player2, pokemon2)
   println("You have chosen %s".format(attack2))
+
+  val damage1 = damageDone(pokemon1.level)
+  println("Damage done to %s's pokemon = %d HP".format(player2.name, damage1))
+
+  val damage2 = damageDone(pokemon2.level)
+  println("Damage done to %s's pokemon = %d HP".format(player1.name, damage2))
+
 
 }

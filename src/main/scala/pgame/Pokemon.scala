@@ -5,6 +5,7 @@ case class Pokemon(name: String,
                    types: Set[PokemonType.Value],
                    nickname: String,
                    level: Int = 1,
+                   healthPoints: Int = 11,
                    evolutionLevel: Option[Int] = None) {
 
   override def toString = "Pokemon(nickname: %s, attacks: (%s), types: %s)".
