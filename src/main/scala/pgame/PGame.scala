@@ -5,33 +5,46 @@ object PGame extends App {
   println("Welcome to Pokemon Master Quest!")
 
   // Daniel's
-  val iceDragon = Pokemon("Kyuru", Set(Attack.FLY, Attack.ICE_BLADE, Attack.PROTECT, Attack.ICE_BEAM),
-    Set(PokemonType.ICE, PokemonType.DRAGON, PokemonType.FLYING), "Kyuro", level = 92, healthPoints = 99960)
+  val iceDragon = Pokemon("Kyuro", Set(Attack.FLY, Attack.ICE_BLADE, Attack.PROTECT, Attack.ICE_BEAM),
+    Set(PokemonType.ICE, PokemonType.DRAGON, PokemonType.FLYING), "Kyuro", level = 100, healthPoints = 99980)
   val e = Pokemon("Elemental", Set(Attack.ELEMENTAL_PYLON, Attack.ELEMENTAL_BOLT, Attack.PROTECT,
     Attack.ELEMENTAL_BLAST), Set(PokemonType.ELEMENTAL), "Elemental", level = 100, healthPoints = 99990)
-  val daniel = Trainer("daniel", Set(e, iceDragon))
+  val ss = Pokemon("Sword-slash", Set(Attack.FLY, Attack.SWORD_ATTACK, Attack.SURF,Attack.SWORD_THROWER),
+  Set(PokemonType.WATER, PokemonType.FLYING, PokemonType.STEEL), "Sword-Slash", level = 100, healthPoints = 99990)
+
+  val daniel = Trainer("daniel", Set(e, iceDragon, ss))
+
 
   // Joe's
   val pi = Pokemon("Pigno", Set(Attack.FLAME_PUNCH, Attack.FIRE_SPIN, Attack.FLAME_WHEEL, Attack.HEAD_BUT),
     Set(PokemonType.FIRE, PokemonType.FIGHTING), "Pigno", level = 100, healthPoints = 99990)
   val je = Pokemon("Jelemental", Set(Attack.ELEMENTAL_RING, Attack.ELEMENTAL_PAW, Attack.BUSHY_TAIL,
     Attack.HEAD_BUT), Set(PokemonType.ELEMENTAL), "Jelemental", level = 100, healthPoints = 99990)
-  val joe = Trainer("joe", Set(je, pi))
+  val resh = Pokemon("reshirack", Set(Attack.FLAMING_BEAK, Attack.FLY, Attack.FLAME_WHEEL, Attack.FLAME_ROLL),
+  Set(PokemonType.FIRE, PokemonType.FLYING), "Reshirak", level = 100, healthPoints = 99990)
 
-  var player1: Trainer = _
-  do {
-    val player1Name = readLine("Player 1 type in your name: ")
-    player1 = if (player1Name == daniel.name) daniel else if (player1Name == joe.name) joe else null
-  } while (player1 == null)
+  val joe = Trainer("joe", Set(je, pi, resh))
 
+  // Stuart's
+  val stom = Pokemon("omant", Set(Attack.PROTECT, Attack.PSYCHIC, Attack.PSYCHIC_BOLT, Attack.BODY_SLAM),
+  Set(PokemonType.PSYCHIC, PokemonType.WATER), "Stomant", level = 90, healthPoints = 99910)
+  val stuart = Trainer("stuart", Set(stom))
+
+  val allTrainers = Set(daniel, joe, stuart)
+
+  def choosePlayer(number: Int): Trainer = {
+    var player: Trainer = null
+    do {
+      val playerName = readLine("Player %d type in your name: ".format(number))
+      player = allTrainers.find(_.name == playerName).getOrElse(null)
+    } while (player == null)
+    player
+  }
+
+  var player1 = choosePlayer(1)
   println("Player 1 is %s".format(player1))
 
-  var player2: Trainer = _
-  do {
-    val player2Name = readLine("Player 2 type in your name: ")
-    player2 = if (player2Name == daniel.name) daniel else if (player2Name == joe.name) joe else null
-  } while (player2 == null)
-
+  var player2 = choosePlayer(2)
   println("Player 2 is %s".format(player2))
 
 
