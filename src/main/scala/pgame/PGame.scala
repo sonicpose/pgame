@@ -79,17 +79,26 @@ object PGame extends App {
   val pokemon2 = choosePokemon(player2)
   println("You have chosen %s".format(pokemon2))
 
-  val attack1 = chooseAttack(player1, pokemon1)
-  println("You have chosen %s".format(attack1))
+  var p1 = pokemon1
+  var p2 = pokemon2
 
-  val attack2 = chooseAttack(player2, pokemon2)
-  println("You have chosen %s".format(attack2))
+  do {
 
-  val damage1 = damageDone(pokemon1.level)
-  println("Damage done to %s's pokemon = %d HP".format(player2.name, damage1))
+    val attack1 = chooseAttack(player1, p1)
+    println("You have chosen %s".format(attack1))
 
-  val damage2 = damageDone(pokemon2.level)
-  println("Damage done to %s's pokemon = %d HP".format(player1.name, damage2))
+    val attack2 = chooseAttack(player2, p2)
+    println("You have chosen %s".format(attack2))
 
+    val damage1 = damageDone(p1.level)
+    val damage2 = damageDone(p2.level)
+
+    p1 = p1.copy(healthPoints = p1.healthPoints - damage2)
+    p2 = p2.copy(healthPoints = p2.healthPoints - damage1)
+
+    println("%s HP = %d".format(p1.nickname, p1.healthPoints))
+    println("%s HP = %d".format(p2.nickname, p2.healthPoints))
+
+  } while (p1.healthPoints > 0 && p2.healthPoints > 0)
 
 }
